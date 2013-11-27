@@ -91,10 +91,10 @@ int parse(char * fileName,char ** songs,char ** playcounts,int *number)
         char * tempstr = malloc(j);
         memcpy(tempstr,xmlPtr,j);
         
-        if(strstr(tempstr,MP3) == NULL) {
-            free(tempstr);
-            continue;
-        }
+        // if(strstr(tempstr,MP3) == NULL) {
+        //     free(tempstr);
+        //     continue;
+        // }
         
         // ADD SONG NAME TO SONG LIST
         
