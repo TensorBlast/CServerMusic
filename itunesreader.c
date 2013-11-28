@@ -46,29 +46,29 @@ int main(int argc, char **argv)
 	return 0;
 }
 
-void selectionSortSongs(char** songs, int *playcounts, int array_size) {
-    int i;
-    for (i = 0; i < array_size - 1; ++i)
-    {
-        int j, max, tempcount;
-        char *tempsong;
-        max = i;
+// void selectionSortSongs(char** songs, int *playcounts, int array_size) {
+//     int i;
+//     for (i = 0; i < array_size - 1; ++i)
+//     {
+//         int j, max, tempcount;
+//         char *tempsong;
+//         max = i;
         
-        for (j = i+1; j < array_size; ++j)
-        {
-            if (playcounts[j] > playcounts[max])
-                max = j;
-        }
+//         for (j = i+1; j < array_size; ++j)
+//         {
+//             if (playcounts[j] > playcounts[max])
+//                 max = j;
+//         }
         
-        *tempsong = songs[i];
-        songs[i] = songs[max];
-        songs[max] = tempsong;
+//         *tempsong = songs[i];
+//         songs[i] = songs[max];
+//         songs[max] = tempsong;
         
-        tempcount = playcounts[i];
-        playcounts[i] = playcounts[max];
-        playcounts[max] = tempcount;
-    }
-}
+//         tempcount = playcounts[i];
+//         playcounts[i] = playcounts[max];
+//         playcounts[max] = tempcount;
+//     }
+// }
 
 int parse(char * fileName,char ** songs,char ** playcounts,int *number)
 {
@@ -140,7 +140,7 @@ int parse(char * fileName,char ** songs,char ** playcounts,int *number)
 		memcpy(*songs,xmlPtr,i-1);
 		(*songs)[i-1]='\0';
 		*number+=1;
-        printf("%s", *songs);
+        //printf("%s", *songs);
 		songs++;
         
         // CHECK FOR PLAY COUNT AND ADD TO PLAY COUNT LIST
@@ -150,7 +150,7 @@ int parse(char * fileName,char ** songs,char ** playcounts,int *number)
         if(strstr(tempstr,PLAY_COUNT) == NULL) {
             *(playcounts) = (char*)malloc(sizeof(char)*2);
             memcpy(*playcounts,zeroPlays,sizeof(char)*2);
-            printf(" || played: %s\n", *playcounts);
+            //printf(" || played: %s\n", *playcounts);
             playcounts++;
         } else {
             xmlPtr = strstr(xmlPtr,PLAY_COUNT);
@@ -163,7 +163,7 @@ int parse(char * fileName,char ** songs,char ** playcounts,int *number)
             *(playcounts)=(char *)malloc(k);
             memcpy(*playcounts,xmlPtr,k-1);
             (*playcounts)[k-1]='\0';
-            printf(" || played: %s\n", *playcounts);
+            //printf(" || played: %s\n", *playcounts);
             playcounts++;
             
         }
