@@ -19,6 +19,15 @@
 #define RCVBUFSIZE 700000             /* The receive buffer size */
 #define SNDBUFSIZE 700000             /* The send buffer size */
 #define TITLELEN 150
+#define BUFSIZE 501
+#define KEY "Key"
+#define NAME "<key>Name</key>"
+#define SIZE "Size"
+#define PLAY_COUNT "<key>Play Count</key>"
+#define CLOSE_DICT "</dict>"
+#define INTEGER "integer"
+#define KIND "Kind"
+#define MP3 "MPEG audio file"
 
 typedef union
 {
@@ -63,7 +72,7 @@ int logFile(char *fileName, char *method, char *ip, pthread_mutex_t *mutex, pthr
 song *compareSongDir(song *server, int serverLen, song *client, int clientLen, int *lenOfNewArr);
 int numSongsInDir();
 song *createSongArray(int numSongs);
-song *createSongArrayFromItunes(int numSongs, int cap);
+song *createSongArrayFromItunes(int cap, int *);
 int calculateChecksum(FILE *file,song *s);
 int sendSongArray(song *songs,int num,int sock);
 song *recvSongArray(int length,int sock);
@@ -74,6 +83,7 @@ header * receiveHeader(int sock);
 FILE * receiveFile(FILE *file, int numBytesToWrite, int sock);
 int sendFile(FILE *file, int sock);
 int Parse(FILE * f);
+int parse(char * fileName,char ** s,char ** p, int *n);
 
 
 #endif
