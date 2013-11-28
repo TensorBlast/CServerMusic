@@ -130,7 +130,7 @@ void *ThreadMain(void *threadArgs)
 		header *header= receiveHeader(clientSock);
 		int method = header->method;
 		int indexes=header->indexes;
-
+		int header_cap_length=header->length;
 		free(header);
 		if(method==LIST)
 		{
@@ -182,7 +182,7 @@ void *ThreadMain(void *threadArgs)
 			if(!logFile(logStr,"CAP",ip,mutex,cond,&busy));
 				fatal_error("CAP log file failed\n");
 
-			if(!serverCap(clientSock))
+			if(!serverCap(clientSock,indexes,header_cap_length))
 				fatal_error("server cap failed\n");
 		}
 		else

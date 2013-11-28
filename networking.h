@@ -29,13 +29,6 @@
 #define KIND "Kind"
 #define MP3 "MPEG audio file"
 
-typedef union
-{
-	NOCAP,
-	CAP
-} Mode;
-
-Mode mode=NOCAP;
 /* struct that contains info about the method being invoked and the information to follow */
 typedef struct{
 	int method;
@@ -82,7 +75,6 @@ header * receiveHeader(int sock);
 
 FILE * receiveFile(FILE *file, int numBytesToWrite, int sock);
 int sendFile(FILE *file, int sock);
-int Parse(FILE * f);
 int parse(char * fileName,char ** s,char ** p, int *n);
 
 

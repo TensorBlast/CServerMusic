@@ -1,14 +1,14 @@
 #################################################################
 ##
 ## FILE:	Makefile
-## AUTHOR:	Audrey Meinders and Marissa Wall
+## AUTHOR:	Ankit Pasi || Alex Wong
 ## PROJECT:	CS 3251 Project 2 - Professor Traynor
 ## DESCRIPTION: Compile Project 2 Server
 ##
 #################################################################
 
 CC=gcc
-LDFLAGS=-lssl -lcrypto
+LDFLAGS=-lssl -lcrypto -w
 
 OS := $(shell uname -s)
 
@@ -22,14 +22,15 @@ all: server
 server: serverthread.o networking.o
 	$(CC) -lcrypto -lpthread serverthread.o networking.o -o musicServer $(LDFLAGS)
 	
-server.o: serverthread.c parser.h
-	$(CC) -c serverthread.c
+serverthread.o: serverthread.c parser.h
+	$(CC) -c serverthread.c -w
 	
 parser.o: parser.c parser.h
-	$(CC) -c parser.c
+	$(CC) -c parser.c -w
 
-networking.o: networking.c networking.h
-	$(CC) -c networking.c
+networking.o: networking.c networking.h sorter.h
+	$(CC) -c networking.c  sorter.c -w
+
 
 clean:
 	rm -f serverthread parser *.o

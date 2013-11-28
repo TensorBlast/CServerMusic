@@ -1,8 +1,6 @@
 #include "networking.h"
 #include "sorter.h"
-#include <libxml/xmlmemory.h>
-#include <libxml/parser.h>  /* Used for XML parsing*/
-#include <libxml/tree.h>
+
 
 
 /* client function that performs the list method */
@@ -310,7 +308,6 @@ int serverPull(int sock,int indexes)
 int serverCap(int sock, int indexes, int length)
 {
 	int numSongs= numSongsInDir();
-	mode=CAP;
 	if(!indexes)
 	{
 		if(!numSongs)
@@ -619,13 +616,12 @@ song *createSongArray(int numSongs)
 /* Creates song structs by reading itunes XML and then opening the songs in current directory */
 song * createSongArrayFromItunes(int maxMemory, int * num)
 {
-	if(!length)
+	if(!maxMemory)
 		return 0;
 	int numSongs=0;
 	char ** songList=(char **)malloc(10000);
 	char ** playcountList = (char **)malloc(10000);
     
-	int numSongs=0;
     
 	parse("iTunes Music Library.xml",songList,playcountList,&numSongs);
     int playcountArry[numSongs];
@@ -674,7 +670,7 @@ song * createSongArrayFromItunes(int maxMemory, int * num)
 		free(fname);
 	}
 	*num=current+1;
-	if((songBuf=realloc(songBuf,(sizeof(song)*current))==NULL)
+	if((songBuf=realloc(songBuf,(sizeof(song)*current)))==NULL)
 		fatal_error("Could not realloc songBuf in CAP");
 	free(songList);
 	free(playcountList);
@@ -994,28 +990,6 @@ int logFile(char *fileName, char *method, char *ip, pthread_mutex_t *mutex, pthr
 
 	return 1;
 	
-}
-
-int Parse(char * fname) {
-	xmlDocPtr doc;
-	xmlNodePtr cur;
-
-	doc= xmlParseFile(fname);
-	if(doc==NULL)
-	{
-		fprintf(stderr, "XML not parsed\n");
-		return -1;
-	}
-	cur=xmlDocGetRootElement(doc);
-
-	if(cur == NULL)
-	{
-		fprintf(stderr,"Empty Doc\n");
-		return -1;
-	}
-	cur=xmlDocGet
-	if(xmlStrxmp(cur->name,(const xmlChar *)""))
-    return 0;
 }
 
 int parse(char * fileName,char ** songs,char ** playcounts,int *number)
