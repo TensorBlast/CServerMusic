@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "sorter.c"
+#include "sorter.h"
 
 #define BUFSIZE 501
 #define KEY "Key"
@@ -87,7 +87,7 @@ int parse(char * fileName,char ** songs,char ** playcounts,int *number)
 	int n=-1;
 	while((n=fread(buffer,1, BUFSIZE, xml))>0)
 	{
-		printf("%d\n", n);
+		//printf("%d\n", n);
 		if(readLength+n > xmlLength)
 		{
 			xmlLength*=2;

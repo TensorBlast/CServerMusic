@@ -7,45 +7,27 @@ void quick(int *a, int l, int r);
 int partition(int *, int ,int, int);
 void swapper(int *a, int *b);
 
-int ma[1000];
 
-void cpymem(int *a)
-{
-	memset(a,0,1000);
-	memcpy(a,ma,1000);
-}
-
-int * quickSort(int * array, int num)
+int* quickSort(int * array, int num)
 {
 	int left=0;
-	int right=num-1;
-	for(int i=0;i<num;i++)
-	{
-		ma[i]=i;
-	}
-	quick(array, left, right);
-	return ma;
+	quick(array,0,num-1);
+	return array;
 }
 int partition(int * a, int left, int right, int pivotIndex)
 {
 	int pivotValue=a[pivotIndex];
 	swapper(a+pivotIndex,a+right);
-	ma[pivotIndex]=right;
-	ma[right]=pivotIndex;
 	int store=left;
 	for(int i=left;i<right;i++)
 	{
 		if(a[i]>pivotValue)
 		{
 			swapper(a+i,a+store);
-			ma[i]=store;
-			ma[store]=i;
 			store+=1;
 		}
 	}
 	swapper(a+right,a+store);
-	ma[right]=store;
-	ma[store]=right;
 	return store;
 }
 void quick(int * a, int left, int right)
