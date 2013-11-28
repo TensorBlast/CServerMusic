@@ -2,62 +2,66 @@
 #include <stdlib.h>
 #include <string.h>
 
-int *quickSort(int *a, int nElements, int **ma);
-void quick(int *a, int l, int r,int (*com)(int, int), int **m);
+int *quickSort(int *a, int nElements);
+void quick(int *a, int l, int r);
+int partition(int *, int ,int, int);
 void swapper(int *a, int *b);
-int greater(int a, int b)
+
+int ma[1000];
+
+void cpymem(int *a)
 {
-	return a-b;
+	memset(a,0,1000);
+	memcpy(a,ma,1000);
 }
 
-int * quickSort(int * array, int num, int **ma)
+int * quickSort(int * array, int num)
 {
 	int left=0;
-	int right=num;
+	int right=num-1;
 	for(int i=0;i<num;i++)
 	{
-		*ma[i]=i;
+		ma[i]=i;
 	}
-	quick(array, left, right, &greater, ma);
-	return *ma;
+	quick(array, left, right);
+	return ma;
 }
-void quick(int * a, int left, int right, int (*cmp)(int, int), int **m)
+int partition(int * a, int left, int right, int pivotIndex)
 {
-	int l=left;
-	int r=right;
+	int pivotValue=a[pivotIndex];
+	swapper(a+pivotIndex,a+right);
+	ma[pivotIndex]=right;
+	ma[right]=pivotIndex;
+	int store=left;
+	for(int i=left;i<right;i++)
+	{
+		if(a[i]>pivotValue)
+		{
+			swapper(a+i,a+store);
+			ma[i]=store;
+			ma[store]=i;
+			store+=1;
+		}
+	}
+	swapper(a+right,a+store);
+	ma[right]=store;
+	ma[store]=right;
+	return store;
+}
+void quick(int * a, int left, int right)
+{
 	int p=(left+right)/2;
-	while(l<=r)
+	int pnew;
+	if(left<right)
 	{
-		if(cmp(a+l,a+p)<0)
-		{
-			l++;
-		}
-		if(cmp(a+r,a+p)>0)
-		{
-			r--;
-		}
-		if(l <= r)
-		{
-			swapper(a+l,a+r);
-			int t=*m[l];
-			*m[l]=*m[r];
-			*m[r]=t;
-			l++;
-			r--;
-		}
-	}
-	if(left<r)
-	{
-		quick(a,left,r,cmp,m);
-	}
-	if(l<right)
-	{
-		quick(a,l,right,cmp,m);
+		pnew=partition(a,left,right,p);
+		quick(a,left,pnew-1);
+		quick(a,pnew+1,right);
 	}
 }
 void swapper(int * a, int * b)
 {
-	int temp=*a;
+	int temp = *a;
 	memcpy(a,b,sizeof(temp));
 	memcpy(b,&temp,sizeof(temp));
 }
