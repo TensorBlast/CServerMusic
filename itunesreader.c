@@ -26,18 +26,19 @@ int main(int argc, char **argv)
 	parse(argv[1],songList,playcountList,&numSongs);
     printf("~*~*~*~*~*~ HELLO WORLD ~*~*~*~*~*~");
     int playcountArry[numSongs];
+    int map[numSongs];
     
 	for(int i = 0; i < numSongs; i++) {
 		//printf("Song : %s || Playcount : %s\n", songList[j], playcountList[j]);
 		playcountArry[i]=atoi(playcountList[i]);
+		map[i]=i;
 	}
     
-	quickSort(playcountArry, numSongs);
+	quickSort(playcountArry,map, numSongs);
     
 	for(int j = 0; j < numSongs; j++)
 	{
-		printf("Song : %s || Playcount : %s\n", songList[j], playcountArry[j]);
-
+		printf("Song : %s || Playcount : %d\n", songList[map[j]], playcountArry[j]);
 	}
     
 	free(songList);
