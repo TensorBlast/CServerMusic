@@ -98,7 +98,7 @@ int parse(char * fileName,char ** songs,char ** playcounts,int *number)
 		memset(buffer,0,BUFSIZE);
 	}
 	xmlContent[readLength]='\0';
-	printf("%s\n", xmlContent);
+	//printf("%s\n", xmlContent);
 	/* Now parse file contents which are in xmlContents */
 
 	char * xmlPtr = xmlContent;
