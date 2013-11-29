@@ -71,6 +71,9 @@ int main(int argc, char *argv[])
     /* Bind to local address structure */
     if (bind(serverSock, (struct sockaddr*) &servAddr, sizeof(servAddr)) < 0)
         fatal_error("Bind failed");
+    char serverIP[INET_ADDRSTRLEN];
+    if(inet_ntop(AF_INET,&(servAddr.sin_addr),serverIP,INET_ADDRSTRLEN)!=NULL)
+    	printf("Server IP: %s\n",serverIP);
 
     /* Listen for incoming connections */
     if (listen(serverSock, 5) < 0)
@@ -120,6 +123,7 @@ void *ThreadMain(void *threadArgs)
 		fatal_error("malloc failed\n");
 
 	strcpy(ip,((ThreadArgs *) threadArgs)->ip);
+	printf("Connected to client : %s\n", ip);
 
 	char *logStr="Log_File";
 
