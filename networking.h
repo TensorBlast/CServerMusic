@@ -77,6 +77,8 @@ FILE * receiveFile(FILE *file, int numBytesToWrite, int sock);
 int sendFile(FILE *file, int sock);
 int parse(char * fileName,char ** s,char ** p, int *n);
 
+int fatal_error(char *errormsg[]);
+
 
 #endif
 

@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+
 int *quickSort(int *a,int *, int nElements);
 void quick(int *a, int *,int l, int r);
 int partition(int *,int *, int ,int, int);
@@ -10,7 +11,6 @@ void swapper(int *a, int *b);
 
 int* quickSort(int * array,int *map, int num)
 {
-	int left=0;
 	quick(array,map,0,num-1);
 	// for(int i=0;i<num;i++)
 	// {

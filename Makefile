@@ -8,7 +8,7 @@
 #################################################################
 
 CC=gcc
-LDFLAGS=-lssl -lcrypto -w
+LDFLAGS=-lssl -lcrypto -w -v
 
 OS := $(shell uname -s)
 
@@ -20,7 +20,7 @@ ifeq ($(OS), SunOS)
 all: server
 	
 server: serverthread.o networking.o
-	$(CC) -lcrypto -lpthread serverthread.o networking.o -o musicServer $(LDFLAGS)
+	$(CC) -lcrypto -lpthread serverthread.o networking.o sorter.o -o musicServer $(LDFLAGS)
 	
 serverthread.o: serverthread.c parser.h
 	$(CC) -c serverthread.c -w
@@ -28,8 +28,13 @@ serverthread.o: serverthread.c parser.h
 parser.o: parser.c parser.h
 	$(CC) -c parser.c -w
 
+sorter.o: sorter.c sorter.h
+	$(CC) -c sorter.c
+
 networking.o: networking.c networking.h sorter.h
-	$(CC) -c networking.c  sorter.c -w
+	$(CC) -c networking.c  -w
+
+
 
 
 clean:

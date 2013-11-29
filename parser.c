@@ -30,6 +30,8 @@ int parser()
 			givenMethod = 2;
 		else if (strlen(input)<BUFSIZE&&strncmp(input, "LEAVE", BUFSIZE) == 0)
 			givenMethod = 3;
+		else if(strlen(input)<BUFSIZE&&strncmp(input,"CAP",BUFSIZE) == 0)
+			givenMethod=4;
 		else
 			printf("Invalid input\n");
 	}

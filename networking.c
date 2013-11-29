@@ -1,6 +1,6 @@
 #include "networking.h"
 #include "sorter.h"
-
+#include <openssl/md5.h>
 
 
 /* client function that performs the list method */
@@ -1099,4 +1099,11 @@ int parse(char * fileName,char ** songs,char ** playcounts,int *number)
 	return 0;
 }
 
+
+int fatal_error(char *errormsg[])
+{
+	printf("%s", errormsg);
+	printf("\n");
+	exit(0);
+}
 
