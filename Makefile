@@ -8,7 +8,7 @@
 #################################################################
 
 CC=gcc
-LDFLAGS=-lssl -lcrypto -w -v
+LDFLAGS=-lssl -lcrypto -w
 
 OS := $(shell uname -s)
 
@@ -28,13 +28,13 @@ serverthread.o: serverthread.c parser.h
 parser.o: parser.c parser.h
 	$(CC) -c parser.c -w
 
-sorter.o: sorter.c sorter.h
-	$(CC) -c sorter.c
 
-networking.o: networking.c networking.h sorter.h
+
+networking.o: networking.c networking.h sorter.o
 	$(CC) -c networking.c  -w
 
-
+sorter.o: sorter.c sorter.h
+	$(CC) -c sorter.c
 
 
 clean:
